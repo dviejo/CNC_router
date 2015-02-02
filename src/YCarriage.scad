@@ -109,18 +109,59 @@ module centered_cube(size)
 }
 
 
+rad = 3;
+height=20;
+displacement = 25;
+
 module yPlate()
 {
   difference()
   {
-    union()
+    leg();
+    
+    hull()
     {
-      centered_cube([width+40, mainBodyLength, 6]);
-      
-      
+      translate([slotWidth+displacement/2+rad/2, -mainBodyLength/2, -5]) cylinder(r=mainBodyLength/4, h=30);
+      translate([slotWidth+displacement, -mainBodyLength/2, -5]) cylinder(r=mainBodyLength/4, h=30);
     }
+    
+    for(i=[-1, 1])
+    {
+      translate([slotWidth+displacement/3, -mainBodyLength/2+i*mainBodyLength/3, -5]) cylinder(r=1.7, h=30);
+      translate([slotWidth+displacement/3, -mainBodyLength/2+i*mainBodyLength/3, -5]) cylinder(r=3.2, h=18);
+    }
+    translate([-slotWidth-displacement/3, -mainBodyLength/2	, -5]) cylinder(r=1.7, h=30);
+    translate([-slotWidth-displacement/3, -mainBodyLength/2, -5]) cylinder(r=3.2, h=18);
+    
+      // T-Slot bolt holes and cap holes
+  #for(i=[-1, 1]) 
+  {
+    for(j=[-1, 1]) 
+    {
+      translate([i*(slotWidth+15)/2, -mainBodyLength/2+slotDist*j, -5])
+	cylinder(r=2.5+0.25, h=mainBodyHeigh+2);
+    }
+  }
+
   }
 }
 
-//rodNutCarriage();
-yPlate();
+//module leg. 
+module leg()
+{
+  rotate([90, 0, 0]) chained_hull()
+  {
+    translate([-slotWidth-displacement/3+rad, height-rad, mainBodyLength/3]) cylinder(r=rad, h=mainBodyLength/3);
+    translate([-slotWidth-displacement+rad, height-rad, mainBodyLength/3]) cylinder(r=rad, h=mainBodyLength/3);
+    translate([-slotWidth, 0, 0]) cylinder(r=rad, h=mainBodyLength);
+
+    translate([slotWidth, 0, 0]) cylinder(r=rad, h=mainBodyLength);
+    translate([slotWidth+displacement-rad, height-rad, 0]) cylinder(r=rad, h=mainBodyLength);
+    translate([slotWidth+displacement/3-rad, height-rad, 0]) cylinder(r=rad, h=mainBodyLength);
+  }
+}
+
+rodNutCarriage();
+
+translate([0, -50, 0]) 
+  yPlate();
