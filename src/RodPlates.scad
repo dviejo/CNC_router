@@ -8,13 +8,13 @@
  */
 
 wide = 70;
-length = 40;
+length = 38;
 height = 10;
 
 rodBoltDistance = 55;
 rodBoltRad = 3;
 rodNutRad = 5.5;
-rodNutHeight = 5.25;
+rodNutHeight = 7.5;
 slotBoltDistance = 40;
 slotBoltRad = 2.5;
 
@@ -41,9 +41,9 @@ module plate()
     //rod structure attaching holes
     for(i=[-1, 1])
     {
-      translate([i*rodBoltDistance/2, -length/3, -1]) 
+      translate([i*rodBoltDistance/2, -length/3+6, -1]) 
 	cylinder(r=rodBoltRad+0.25, h=height+2);
-      translate([i*rodBoltDistance/2, -length/3, height-rodNutHeight]) 
+      translate([i*rodBoltDistance/2, -length/3+6, height-rodNutHeight]) 
 	cylinder(r=rodNutRad+0.35, h=rodNutHeight+1, $fn = 6);
     }
   }
