@@ -4,7 +4,7 @@
  * 
  * Designed by Diego Viejo
  * Created on 20/Jan/2015
- * Last modified 20/Jan/2015
+ * Last modified 17/Feb/2015
  * 
  */
 
@@ -163,5 +163,5 @@ module leg()
 
 rodNutCarriage();
 
-translate([0, -50, 0]) 
+*translate([0, -50, 0]) 
   yPlate();
