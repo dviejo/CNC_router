@@ -37,10 +37,10 @@ module plate()
       translate([i*slotBoltDistance/2, length/3, -1]) 
 	cylinder(r=slotBoltRad+0.25, h=height+2);
     }
-    translate([0, -length/2 + 4, -1]) 
+    translate([0, -length/2 + 4, height-2.7]) 
 	cylinder(r=slotBoltRad+0.25, h=height+2);
-    translate([0, -length/2 + 4, 2]) 
-	cylinder(r=slotBoltRad*2+1, h=height+2);
+    #translate([0, -length/2 + 4, -3]) 
+	cylinder(r=slotBoltRad*2+1, h=height);
     
     //rod structure attaching holes
     for(i=[-1, 1])
