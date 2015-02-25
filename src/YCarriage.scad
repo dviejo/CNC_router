@@ -13,10 +13,10 @@ outerRad = 48 / 2;
 holeRad = 38 / 2;
 mainBodyRad = 28 / 2;
 
-mainBodyLength = 60;
+mainBodyLength = 45;
 
-plateHeight = 6;
-mainBodyHeigh = 10.7 + mainBodyRad + plateHeight;
+plateHeight = 8;
+mainBodyHeigh = 1.7 + mainBodyRad + plateHeight;
 
 // T-Slot measurements 
 slotDist = 20;
@@ -24,7 +24,7 @@ slotWidth = 20*3;
 
 width = slotWidth+30;
 
-module roulette(localHeight=10)
+module roulette(localHeight=8)
 {
   for(r=[-45, 0, 45, 135, 180, 225])
     rotate(r)
@@ -35,7 +35,7 @@ module roulette(localHeight=10)
 module carriageBody()
 {
   translate([-slotWidth/2, 0, 0]) cube([slotWidth, mainBodyLength, mainBodyHeigh+5]);
-  translate([-width/2, 0, 0]) cube([width, mainBodyLength, 10]);
+  translate([-width/2, 0, 0]) cube([width, mainBodyLength, plateHeight]);
 }
 
 module carriageHoles()
@@ -65,7 +65,7 @@ module carriageHoles()
   {
     for(j=[-1, 1]) 
     {
-      translate([i*(slotWidth+15)/2, mainBodyLength/2+slotDist*j, -1])
+      translate([i*(slotWidth+15)/2, mainBodyLength/2+slotDist*j/2, -1])
 	cylinder(r=2.5+0.25, h=mainBodyHeigh+2);
     }
   }
@@ -77,7 +77,7 @@ module carriageHoles()
     {
       translate([i*slotWidth/2, mainBodyLength*2/3, mainBodyHeigh+5]) sphere(r=0.1);
       translate([i*slotWidth/2, 0, mainBodyHeigh+5]) sphere(r=0.1);
-      translate([i*slotWidth/2, 0, 10]) sphere(r=0.1);
+      translate([i*slotWidth/2, 0, plateHeight]) sphere(r=0.1);
     }
   }
 }
