@@ -29,7 +29,12 @@ module spindleMount()
     
     translate([0, spindleRad+wallThick, -1]) cylinder(r=spindleRad, h=height+2);
     
-    translate([-2, spindleRad*2, -1]) cube([4, 50, height+2]);
+    hull()
+    {
+      translate([-2, spindleRad*2, -1]) cube([4, 5, height+2]);
+      translate([-7/2, spindleRad*2+40, -1]) cube([7, 5, height+2]);
+    }
+    
     
     //attaching holes
     for(i = [-1, 1])
@@ -39,7 +44,7 @@ module spindleMount()
     
     //fasten hole and nut
     translate([-20, spindleRad*2 + wallThick*5/2, height/2]) rotate([0, 90, 0]) cylinder(r=boltRad, h=40);
-    #translate([10-4.5, spindleRad*2 + wallThick*5/2, height/2]) rotate([0, 90, 0]) cylinder(r=9*0.575, h=5, $fn=6);
+    translate([10-4.5, spindleRad*2 + wallThick*5/2, height/2]) rotate([0, 90, 0]) cylinder(r=9*0.575, h=5, $fn=6);
   }
 }
 
