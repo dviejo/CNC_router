@@ -19,10 +19,10 @@ plateHeight = 8;
 mainBodyHeigh = 1.7 + mainBodyRad + plateHeight;
 
 // T-Slot measurements 
-slotDist = 20;
+slotDist = 30;
 slotWidth = 20*3;
 
-width = slotWidth+30;
+width = slotWidth+60;
 
 module roulette(localHeight=8)
 {
@@ -35,7 +35,23 @@ module roulette(localHeight=8)
 module carriageBody()
 {
   translate([-slotWidth/2, 0, 0]) cube([slotWidth, mainBodyLength, mainBodyHeigh+5]);
-  translate([-width/2, 0, 0]) cube([width, mainBodyLength, plateHeight]);
+  //translate([-width/2, 0, 0]) cube([width, mainBodyLength, plateHeight]);
+  hull()
+  {
+    for(i = [-1, 1])
+    {
+      translate([width/2, mainBodyLength/2 + i* 40, 0]) cylinder(r=1, h=plateHeight);
+      translate([width/2-18, mainBodyLength/2 + i* 40, 0]) cylinder(r=1, h=plateHeight);
+    }
+    translate([20, 0, 0]) cube([1, mainBodyLength, plateHeight]);
+  }
+  chained_hull()
+  {
+    translate([-width/2, mainBodyLength/2 - 8, 0]) cube([1, 16, plateHeight]);
+    translate([-width/2+8, mainBodyLength/2 - 8, 0]) cube([1, 16, plateHeight]);
+
+    translate([-slotWidth/2, 0, 0]) cube([1, mainBodyLength, plateHeight]);
+  }
 }
 
 module carriageHoles()
@@ -61,15 +77,18 @@ module carriageHoles()
       roulette(mainBodyLength/3+2);
   
   // T-Slot bolt holes and cap holes
-  for(i=[-1, 1]) 
+  #for(j=[-1, 1]) 
   {
-    for(j=[-1, 1]) 
-    {
-      translate([i*(slotWidth+15)/2, mainBodyLength/2+slotDist*j/2, -1])
-	cylinder(r=2.5+0.25, h=mainBodyHeigh+2);
-    }
+    translate([50, mainBodyLength/2+slotDist*j, -1])
+      cylinder(r=2.5+0.25, h=mainBodyHeigh+2);
   }
-        
+  #translate([-50, mainBodyLength/2, -1])
+      cylinder(r=2.5+0.25, h=mainBodyHeigh+2);
+  
+  translate([45, mainBodyLength/2, -1])
+      cylinder(r=14, h=mainBodyHeigh+2);
+  
+  
   //fancy cut out
   hull()
   {
