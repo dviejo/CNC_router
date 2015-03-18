@@ -14,7 +14,7 @@ wallThick = 10;
 
 mountHoleSeparation = 2*spindleRad * 0.8; //TODO: fit this to the ZCarriage
 
-boltRad = 5/2;
+boltRad = 5/2 + 0.25;
 
 module spindleMount()
 {
@@ -40,11 +40,12 @@ module spindleMount()
     for(i = [-1, 1])
     {
       translate([i*mountHoleSeparation, -20, height/2]) rotate([-90, 0, 0]) cylinder(r= boltRad, h= 60);
+      translate([i*mountHoleSeparation, 12, height/2]) rotate([-90, 0, 0]) cylinder(r=9*0.57, h= 60);
     }
     
     //fasten hole and nut
-    translate([-20, spindleRad*2 + wallThick*5/2, height/2]) rotate([0, 90, 0]) cylinder(r=boltRad, h=40);
-    translate([10-4.5, spindleRad*2 + wallThick*5/2, height/2]) rotate([0, 90, 0]) cylinder(r=9*0.575, h=5, $fn=6);
+    translate([-20, spindleRad*2 + wallThick*5/2-1, height/2]) rotate([0, 90, 0]) cylinder(r=boltRad, h=40);
+    translate([10-4.5, spindleRad*2 + wallThick*5/2-1, height/2]) rotate([0, 90, 0]) cylinder(r=9*0.57, h=5, $fn=6);
   }
 }
 
