@@ -165,23 +165,18 @@ module yPlate()
   }
 }
 
-//module leg. 
-module leg()
+separatorHeight = 33;
+module separator()
 {
-  rotate([90, 0, 0]) chained_hull()
+  difference()
   {
-    translate([-slotWidth-displacement/3+rad, height-rad, mainBodyLength/3]) cylinder(r=rad, h=mainBodyLength/3);
-    translate([-slotWidth-displacement+rad, height-rad, mainBodyLength/3]) cylinder(r=rad, h=mainBodyLength/3);
-    translate([-slotWidth, 0, 0]) cylinder(r=rad, h=mainBodyLength);
-
-    translate([slotWidth, 0, 0]) cylinder(r=rad, h=mainBodyLength);
-    translate([slotWidth+displacement-rad, height-rad, 0]) cylinder(r=rad, h=mainBodyLength);
-    translate([slotWidth+displacement/3-rad, height-rad, 0]) cylinder(r=rad, h=mainBodyLength);
+    cylinder(r=6, h=separatorHeight);
+    
+    translate([0, 0, -1]) cylinder(r=3, h=separatorHeight+2);
   }
 }
 
 
-rodNutCarriage();
+*rodNutCarriage();
 
-*translate([0, -50, 0]) 
-  yPlate();
+separator();
