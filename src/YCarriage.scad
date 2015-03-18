@@ -77,12 +77,12 @@ module carriageHoles()
       roulette(mainBodyLength/3+2);
   
   // T-Slot bolt holes and cap holes
-  #for(j=[-1, 1]) 
+  for(j=[-1, 1]) 
   {
     translate([50-2.5, mainBodyLength/2+slotDist*j, -1])
       cylinder(r=2.5+0.25, h=mainBodyHeigh+2);
   }
-  #translate([-50, mainBodyLength/2, -1])
+  translate([-50, mainBodyLength/2, -1])
       cylinder(r=2.5+0.25, h=mainBodyHeigh+2);
   
   translate([45, mainBodyLength/2, -1])
@@ -127,44 +127,6 @@ module centered_cube(size)
     cube(size);
 }
 
-
-rad = 3;
-height=20;
-displacement = 25;
-
-module yPlate()
-{
-  difference()
-  {
-    leg();
-    
-    hull()
-    {
-      translate([slotWidth+displacement/2+rad/2, -mainBodyLength/2, -5]) cylinder(r=mainBodyLength/4, h=30);
-      translate([slotWidth+displacement, -mainBodyLength/2, -5]) cylinder(r=mainBodyLength/4, h=30);
-    }
-    
-    for(i=[-1, 1])
-    {
-      translate([slotWidth+displacement/3, -mainBodyLength/2+i*mainBodyLength/3, -5]) cylinder(r=1.7, h=30);
-      translate([slotWidth+displacement/3, -mainBodyLength/2+i*mainBodyLength/3, -5]) cylinder(r=3.2, h=18);
-    }
-    translate([-slotWidth-displacement/3, -mainBodyLength/2	, -5]) cylinder(r=1.7, h=30);
-    translate([-slotWidth-displacement/3, -mainBodyLength/2, -5]) cylinder(r=3.2, h=18);
-    
-      // T-Slot bolt holes and cap holes
-  #for(i=[-1, 1]) 
-  {
-    for(j=[-1, 1]) 
-    {
-      translate([i*(slotWidth+15)/2, -mainBodyLength/2+slotDist*j, -5])
-	cylinder(r=2.5+0.25, h=mainBodyHeigh+2);
-    }
-  }
-
-  }
-}
-
 separatorHeight = 33;
 module separator()
 {
@@ -176,7 +138,9 @@ module separator()
   }
 }
 
+//mirror([0, 1, 0]) //Uncomment this to get the left part
+rodNutCarriage(); 
 
-*rodNutCarriage();
-
-separator();
+for(i=[-1, 0, 1])
+  translate([30*i, 70, 0])
+    separator();
