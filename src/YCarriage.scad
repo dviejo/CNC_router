@@ -79,7 +79,7 @@ module carriageHoles()
   // T-Slot bolt holes and cap holes
   #for(j=[-1, 1]) 
   {
-    translate([50, mainBodyLength/2+slotDist*j, -1])
+    translate([50-2.5, mainBodyLength/2+slotDist*j, -1])
       cylinder(r=2.5+0.25, h=mainBodyHeigh+2);
   }
   #translate([-50, mainBodyLength/2, -1])
