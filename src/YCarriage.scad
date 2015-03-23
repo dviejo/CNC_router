@@ -15,14 +15,14 @@ mainBodyRad = 28 / 2;
 
 mainBodyLength = 45;
 
-plateHeight = 8;
-mainBodyHeigh = 1.7 + mainBodyRad + plateHeight;
+plateHeight = 6;
+mainBodyHeigh = 1.6 + outerRad-4;
 
 // T-Slot measurements 
-slotDist = 30;
+slotDist = 20;
 slotWidth = 20*3;
 
-width = slotWidth+60;
+width = slotWidth+20;
 
 module roulette(localHeight=8)
 {
@@ -35,23 +35,7 @@ module roulette(localHeight=8)
 module carriageBody()
 {
   translate([-slotWidth/2, 0, 0]) cube([slotWidth, mainBodyLength, mainBodyHeigh+5]);
-  //translate([-width/2, 0, 0]) cube([width, mainBodyLength, plateHeight]);
-  hull()
-  {
-    for(i = [-1, 1])
-    {
-      translate([width/2, mainBodyLength/2 + i* 40, 0]) cylinder(r=1, h=plateHeight);
-      translate([width/2-18, mainBodyLength/2 + i* 40, 0]) cylinder(r=1, h=plateHeight);
-    }
-    translate([20, 0, 0]) cube([1, mainBodyLength, plateHeight]);
-  }
-  chained_hull()
-  {
-    translate([-width/2, mainBodyLength/2 - 8, 0]) cube([1, 16, plateHeight]);
-    translate([-width/2+8, mainBodyLength/2 - 8, 0]) cube([1, 16, plateHeight]);
-
-    translate([-slotWidth/2, 0, 0]) cube([1, mainBodyLength, plateHeight]);
-  }
+  translate([-width/2, -10, 0]) cube([width, mainBodyLength+10, plateHeight]);
 }
 
 module carriageHoles()
@@ -59,16 +43,16 @@ module carriageHoles()
   translate([0, mainBodyLength+5, mainBodyHeigh])
     rotate([90, 0, 0]) hull()
     {
-      cylinder(r=mainBodyRad+0.5, h=30);
+      cylinder(r=mainBodyRad+0.5, h=50);
       translate([0, mainBodyRad, 0])
-	cylinder(r=mainBodyRad+0.5, h=30);
+	cylinder(r=mainBodyRad+0.5, h=50);
     }
-
+	
   translate([0, mainBodyLength-10, mainBodyHeigh])
     rotate([90, 0, 0]) 
       intersection()
       {
-	cylinder(r=outerRad+0.5, h=mainBodyLength-10+1);
+	cylinder(r=outerRad+1.75, h=mainBodyLength-10.10);
 	cube([100, outerRad*2 - 8+0.5, 100], center=true);
       }
 
@@ -77,16 +61,12 @@ module carriageHoles()
       roulette(mainBodyLength/3+2);
   
   // T-Slot bolt holes and cap holes
-  for(j=[-1, 1]) 
-  {
-    translate([50-2.5, mainBodyLength/2+slotDist*j, -1])
-      cylinder(r=2.5+0.25, h=mainBodyHeigh+2);
-  }
-  translate([-50, mainBodyLength/2, -1])
-      cylinder(r=2.5+0.25, h=mainBodyHeigh+2);
-  
-  translate([45, mainBodyLength/2, -1])
-      cylinder(r=14, h=mainBodyHeigh+2);
+  for(i=[-1, 1])
+    for(j=[-1, 1]) 
+    {
+      translate([i*(slotWidth/2+5), mainBodyLength/2+slotDist*j-5, -1])
+	cylinder(r=2.5+0.25, h=mainBodyHeigh+2);
+    }
   
   
   //fancy cut out
@@ -141,6 +121,6 @@ module separator()
 //mirror([0, 1, 0]) //Uncomment this to get the left part
 rodNutCarriage(); 
 
-for(i=[-1, 0, 1])
+*for(i=[-1, 0, 1])
   translate([30*i, 70, 0])
     separator();
