@@ -15,8 +15,8 @@ mainBodyRad = 28 / 2;
 
 mainBodyLength = 45;
 
-plateHeight = 6;
-mainBodyHeigh = 1.25 + outerRad-4;
+plateHeight = 5.5;
+mainBodyHeigh = 1.1 + outerRad-4;
 
 // T-Slot measurements 
 slotDist = 20;
@@ -53,7 +53,7 @@ module carriageHoles()
       intersection()
       {
 	cylinder(r=outerRad+1.75, h=mainBodyLength-10.10);
-	cube([100, outerRad*2 - 8+0.5, 100], center=true);
+	cube([100, outerRad*2 - 8+1.5, 100], center=true);
       }
 
   translate([0, mainBodyLength-mainBodyLength/3, mainBodyHeigh])
