@@ -20,7 +20,7 @@ mountHoleSeparation = 2*spindleRad * 0.8; //TODO: fit this to the ZCarriage
 
 boltRad = 5/2 + 0.25;
 
-extraLength = outerRad*2  - 8 + 0.75 - 5 + 1.1;
+extraLength = outerRad*2  - 8 + 0.75 - 10 + 0.75;
 
 module spindleMount()
 {
@@ -57,10 +57,14 @@ module spindleMount()
     
     
     //Transmision eje Z
-    #translate([0, -(outerRad -4 +0.75) + 5, 0])
+    translate([0, -(outerRad -4 +0.75) + 10, 0])
     {
       roulette(localHeight = height+2);
-      translate([0, 0, -1]) cylinder(r=mainBodyRad, h=height+2);
+      hull()
+      {
+	translate([0, 0, -1]) cylinder(r=mainBodyRad, h=height+2);
+	translate([0, 25, -1]) cylinder(r=mainBodyRad, h=height+2);
+      }
       *translate([0, 0, 10])   intersection()
       {
 	cylinder(r=outerRad+1.75, h=height);
@@ -73,10 +77,14 @@ module spindleMount()
 
 module roulette(localHeight=8)
 {
-  for(r=[-45, 0, 45, 135, 180, 225])
+  for(r=[-45, 0, 180, 225])
     rotate(r)
+    {
       translate([holeRad, 0, -1]) 
 	cylinder(r=3, h=localHeight, $fn=25);
+      translate([holeRad, 0, 14]) 
+	cylinder(r=9*0.57, h=localHeight, $fn=25);
+    }
 }
 
 spindleMount();
