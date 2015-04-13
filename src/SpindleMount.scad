@@ -64,7 +64,7 @@ module spindleMount()
     
     //attaching holes
     translate([0, -extraLength, 0])
-    for(i = [-1, 1])
+    #for(i = [-1, 1])
     {
       translate([i*mountHoleSeparation, -20, height/2]) rotate([-90, 0, 0]) cylinder(r= boltRad, h= 60);
       translate([i*mountHoleSeparation, -20, height/2+40]) rotate([-90, 0, 0]) cylinder(r= boltRad, h= 60);
@@ -109,4 +109,18 @@ module roulette(localHeight=8)
     }
 }
 
-spindleMount();
+difference()
+{
+  spindleMount();
+  translate([-100, -extraLength+7, 1]) cube([200, 150, height*3+2]);
+  translate([-100, -extraLength+20, -1]) cube([200, 100, 4]);
+}
+
+translate([0, height*3, 0]) 
+rotate([90, 0, 0])
+translate([0, extraLength, 0])
+difference()
+{
+  spindleMount();
+  translate([-100, -extraLength+3, -1]) cube([200, 150, height*3+2]);
+}
