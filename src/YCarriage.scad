@@ -15,8 +15,8 @@ mainBodyRad = 28 / 2;
 
 mainBodyLength = 45;
 
-plateHeight = 5.5;
-mainBodyHeigh = 1.1 + outerRad-4;
+plateHeight = 5.0;
+mainBodyHeigh = 1.0 + outerRad-4;
 
 // T-Slot measurements 
 slotDist = 20;
