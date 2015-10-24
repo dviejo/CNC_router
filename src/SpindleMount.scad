@@ -64,7 +64,7 @@ module spindleMount()
     
     //attaching holes
     translate([0, -extraLength, 0])
-    for(i = [-1, 1])
+    #for(i = [-1, 1])
     {
       translate([i*mountHoleSeparation, -20, height/2]) rotate([-90, 0, 0]) cylinder(r= boltRad, h= 60);
       translate([i*mountHoleSeparation, -20, height/2+40]) rotate([-90, 0, 0]) cylinder(r= boltRad, h= 60);
