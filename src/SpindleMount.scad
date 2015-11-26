@@ -20,7 +20,9 @@ mountHoleSeparation = 2*spindleRad * 0.8; //TODO: fit this to the ZCarriage
 
 boltRad = 5/2 + 0.25;
 
-extraLength = outerRad*2  - 8 + 0.75 - 8 + 0.5;
+extraLength = 0;// outerRad*2  - 8 + 0.75 - 8 + 0.5;
+
+threadAxlePos = 95;
 
 module spindleMount()
 {
@@ -31,18 +33,18 @@ module spindleMount()
       translate([-spindleRad*1.25, -extraLength, 0]) cube([2.5*spindleRad, 20 + extraLength, height]);
       translate([-spindleRad*2, -extraLength, 0]) cube([4*spindleRad, 20 , height]);
       translate([0, spindleRad+wallThick, 0]) cylinder(r=spindleRad+wallThick, h=height);
-      translate([-10, spindleRad*2 + wallThick, 0]) cube([20, 2*wallThick, height]);
+      translate([-10, spindleRad*2 + wallThick, 0]) cube([20, wallThick+2, height]);
       
       //laterals
       translate([-spindleRad*2, -extraLength, 0]) cube([24, 20 , height*3]);
-      hull()
+      *hull()
       {
 	translate([-spindleRad*1.25, -extraLength, 0]) cube([5, 20, height*3]);
 	translate([-spindleRad*1.25, -extraLength, 0]) cube([5, 20 + extraLength, height]);
       }
 
       translate([spindleRad*2-24, -extraLength, 0]) cube([24, 20 , height*3]);
-      hull()
+      *hull()
       {
 	translate([spindleRad*1.25 - 5, -extraLength, 0]) cube([5, 20, height*3]);
 	translate([spindleRad*1.25 - 5, -extraLength, 0]) cube([5, 20 + extraLength, height]);
@@ -51,8 +53,12 @@ module spindleMount()
       //upper back
       translate([-spindleRad*2, -extraLength, height*3-20]) cube([4*spindleRad, 5 , 20]);
       
+      
+      //Transmision
+      translate([-spindleRad*2, threadAxlePos-20, 0]) cube([spindleRad*4, 27, 14]);
     }
     
+    //spindle support hole
     translate([0, spindleRad+wallThick, -1]) cylinder(r=spindleRad, h=height+2);
     
     hull()
@@ -72,12 +78,13 @@ module spindleMount()
     }
     
     //fasten hole and nut
-    translate([-20, spindleRad*2 + wallThick*5/2-1, height/2]) rotate([0, 90, 0]) cylinder(r=boltRad, h=40);
-    translate([10-4.5, spindleRad*2 + wallThick*5/2-1, height/2]) rotate([0, 90, 0]) cylinder(r=9*0.57, h=5, $fn=6);
+    translate([-25, spindleRad*2 + wallThick*5/3-1, height/2]) rotate([0, 90, 0]) cylinder(r=boltRad, h=40);
+    translate([10-4.5, spindleRad*2 + wallThick*5/3-1, height/2]) rotate([0, 90, 0]) cylinder(r=9*0.57, h=18, $fn=6);
+    translate([-20-4.5, spindleRad*2 + wallThick*5/3-1, height/2]) rotate([0, 90, 0]) cylinder(r=9*0.57, h=18, $fn=26);
     
     
     //Transmision eje Z
-    translate([0, -(outerRad -4 +0.75) + 8, 0])
+    #translate([0, threadAxlePos, 0])
     {
       roulette(localHeight = height+2);
       hull()
@@ -93,7 +100,7 @@ module spindleMount()
     }
 
     //bites cut off
-    translate([-spindleRad*2, -5, height]) rotate([45, 0, 0]) cube([spindleRad*4, 10,10]);
+    *translate([-spindleRad*2, -5, height]) rotate([45, 0, 0]) cube([spindleRad*4, 10,10]);
   }
 }
 
@@ -112,11 +119,11 @@ module roulette(localHeight=8)
 difference()
 {
   spindleMount();
-  translate([-100, -extraLength+7, 1]) cube([200, 150, height*3+2]);
-  translate([-100, -extraLength+20, -1]) cube([200, 100, 4]);
+//  translate([-100, -extraLength+7, 1]) cube([200, 150, height*3+2]);
+//  translate([-100, -extraLength+20, -1]) cube([200, 100, 4]);
 }
 
-translate([0, height*3, 0]) 
+*translate([0, height*3, 0]) 
 rotate([90, 0, 0])
 translate([0, extraLength, 0])
 difference()
