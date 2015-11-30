@@ -188,7 +188,7 @@ module roulette(localHeight=8)
 
 spindleMount();
 translate([0, threadAxlePos, 10]) mirror([0, 0, 1]) transmision();
-translate([-spindleRad*2-5-1, 0, 0]) 
+translate([50, -2, 0]) rotate(90)
     rotate([0, -90, 0]) //for printing
         lateral();
 translate([spindleRad*2 +1, 0, 5]) 
