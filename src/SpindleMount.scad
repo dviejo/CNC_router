@@ -39,20 +39,6 @@ module spindleMount()
       translate([-spindleRad*2, -extraLength, 0]) cube([24, 20 , height*3]);
       translate([spindleRad*2-24, -extraLength, 0]) cube([24, 20 , height*3]);
 
-      //laterals
-*      translate([-spindleRad*2-5-1, 0, 0])
-      hull()
-      {
-	 cube([5, 20, height*3]);
-	 cube([5, threadAxlePos+7, 10]);
-      }
-*      translate([spindleRad*2 +1, 0, 0])
-      hull()
-      {
-        cube([5, 20, height*3]);
-	cube([5, threadAxlePos+7, 10]);
-      }
-
       //upper back
       translate([-spindleRad*2, -extraLength, height*3-20]) cube([4*spindleRad, 5 , 20]);
       
