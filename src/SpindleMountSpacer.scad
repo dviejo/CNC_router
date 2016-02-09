@@ -9,7 +9,7 @@
 
 height = 87;
 width = 75;
-length = 33;
+length = 20;//33;
 rodBoltDistance = 55;
 slotBoltDistance = 40;
 
@@ -34,8 +34,8 @@ difference()
         *translate([i*slotBoltDistance/2, 5, -1]) cylinder(d=5.5, h=height+2, $fn=25);
         *translate([i*slotBoltDistance/2, 5, 7]) cylinder(d=8, h=height+2, $fn=25);
         
-        translate([i*rodBoltDistance/2, 0, height-7-1+separation]) cylinder(d=6.6, h=height, $fn=25);
-        translate([i*rodBoltDistance/2, 0, -1]) cylinder(d=11, h=height-7, $fn=6);
+        translate([i*rodBoltDistance/2, 0, height-7-7+separation]) cylinder(d=6.6, h=height, $fn=25);
+        translate([i*rodBoltDistance/2, 0, -1-6]) cylinder(d=11.5, h=height-7+6, $fn=26);
     }
     
     for(fila=[10, 30])
